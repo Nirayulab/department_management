@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-// function decalaration
+
 void login(void);
 void registration(void);
 void menu();
@@ -14,7 +14,7 @@ void sort();
 void bill();
 void totalbill(int[], int[], int);
 
-typedef struct ITEMS // structure banako
+typedef struct ITEMS
 {
     int product_code;
     char product_name[20];
@@ -24,8 +24,7 @@ typedef struct ITEMS // structure banako
     char description[50];
 
 } item;
-item *items; // item vanako structure bhayo ani items vanako user baata input leako
-
+item *items;
 struct login
 {
     char fname[30];
@@ -162,8 +161,6 @@ void menu()
         bill();
         break;
 
-        break;
-
     case 8:
         printf("Exit\n");
         break;
@@ -179,20 +176,20 @@ void insert()
     FILE *fp;
     fp = fopen("record.txt", "a");
     item a;
-    printf("\nEnter product code: "); // aauta iteam a ko detail
+    printf("\nEnter product code: ");
     scanf("%d", &a.product_code);
     printf("\nEnter product_name: ");
     scanf(" %[^\n]s", a.product_name);
     printf("\nEnter rate: ");
     scanf(" %f", &a.rate);
-    printf("\nEnter weight(in kg): ");
+    printf("\nEnter weight(in gm): ");
     scanf(" %f", &a.weight);
     printf("\nEnter quantity: ");
     scanf(" %d", &a.quantity);
 
     printf("\nEnter description: ");
     scanf(" %[^\n]s", a.description);
-    printf("product_code= %d \nproduct_name= %s \nrate= %.2f \nweight(in kg)= %.2f \nquantity= %d \ndescripition= %s\n", a.product_code, a.product_name, a.rate, a.quantity, a.weight, a.description);
+    printf("product_code= %d \nproduct_name= %s \nrate= %.2f \nweight(in gm)= %.2f \nquantity= %d \ndescripition= %s\n", a.product_code, a.product_name, a.rate, a.weight, a.quantity, a.description);
     fwrite(&a, sizeof(a), 1, fp);
     printf("!!!!RECORD INSERTED SUCCESSFULLY!!!!!\n");
     fclose(fp);
@@ -204,7 +201,7 @@ void display()
 
     fp = fopen("record.txt", "r");
     printf("\n******ITEM DETAILS ARE AS FOLLOW****\n");
-    printf("product_code\tproduct_name\t\trate\t\tweight(in kg)\t\tquantity\t\tdescripition\n");
+    printf("product_code\tproduct_name\t\trate\t\tweight(in gm)\t\tquantity\t\tdescripition\n");
     while (fread(&a, sizeof(a), 1, fp) == 1)
     {
 
@@ -254,7 +251,7 @@ void erase()
 
     while (fread(&a, sizeof(a), 1, fp))
     {
-        printf("%d", code);
+        
         if (code == a.product_code)
         {
 
@@ -280,16 +277,14 @@ void erase()
 }
 void update()
 {
-    FILE *fp,*fp1;
-    item a,b;
+    FILE *fp, *fp1;
+    item a, b;
     int code;
-    
+
     fp = fopen("record.txt", "rb");
-    fp1=fopen("temp.txt","ab");
+    fp1 = fopen("temp.txt", "ab");
     printf("enter the code to update");
     scanf("%d", &code);
-
-  
 
     while (fread(&b, sizeof(b), 1, fp))
     {
@@ -309,21 +304,18 @@ void update()
 
             printf("\nnew description: ");
             scanf(" %[^\n]s", a.description);
-            
+
             fwrite(&a, sizeof(a), 1, fp1);
-            
         }
         else
         {
-            fwrite(&b,sizeof(b),1,fp1);
+            fwrite(&b, sizeof(b), 1, fp1);
         }
-        
     }
     fclose(fp);
     fclose(fp1);
     remove("record.txt");
-    rename("temp.txt","record.txt");
-
+    rename("temp.txt", "record.txt");
 
     printf("RECORD UPDATED SUCCESSFULLY ...!!please check display function\n ");
     menu();
@@ -408,8 +400,6 @@ void bill()
             }
         }
         fwrite(&a, sizeof(a), 1, ft);
-
-        
     }
     fclose(fp);
     fclose(ft);
@@ -429,7 +419,7 @@ void totalbill(int prod_id[], int prod_qty[], int count)
     printf("\n------xyz store-------\n");
     printf("---------------------------");
     printf("\nname\tQTY\trate");
-    fp=fopen("record.txt","rb");
+    fp = fopen("record.txt", "rb");
     while (fread(&a, sizeof(a), 1, fp))
     {
         for (i = 0; i < count; i++)
@@ -443,9 +433,9 @@ void totalbill(int prod_id[], int prod_qty[], int count)
         }
     }
     printf("\n---------------------------");
-    printf("\n\t\ttotal= %.2f\n",total);
+    printf("\n\t\ttotal= %.2f\n", total);
     printf("\n\t***please visit again***\n");
     fclose(fp);
     system("pause");
     menu();
-    }
+}
