@@ -85,7 +85,7 @@ username:
     {
         if ((strcmp(username, l.username) == 0) && (strcmp(password, l.password) == 0))
         {
-            printf("***********LOGGED IN************\n\n***********WELCOME TO OUR DEPARTMENTAL STORE********\n");
+            printf("***********LOGGED IN************\n\n***********WELCOME TO A-NMHRJN DEPARTMENTAL STORE********\n");
             menu();
         }
         else
@@ -124,7 +124,8 @@ void menu()
 {
     int choice;
 
-    printf("\nEnter your choice: \n1.INSERT \n2.DISPLAY \n3.SEARCH \n4.ERASE \n5.sort \n6.UPDATE \n7.BILL \n8.EXIT ");
+    printf("\n1.INSERT \n2.DISPLAY \n3.SEARCH \n4.ERASE \n5.sort \n6.UPDATE \n7.BILL \n8.EXIT ");
+    printf("\nEnter your choice:");
     scanf("%d", &choice);
     switch (choice)
     {
@@ -148,7 +149,7 @@ void menu()
         break;
 
     case 5:
-        printf("sort\n");
+        printf("\nSort\n");
         sort();
         break;
 
@@ -283,7 +284,7 @@ void update()
 
     fp = fopen("record.txt", "rb");
     fp1 = fopen("temp.txt", "ab");
-    printf("enter the code to update");
+    printf("\nEnter the code to update");
     scanf("%d", &code);
 
     while (fread(&b, sizeof(b), 1, fp))
@@ -293,13 +294,13 @@ void update()
             printf("\nENTER THE NEW RECORD\n");
             printf("\n new item code:");
             scanf(" %d", &a.product_code);
-            printf("\nnew item name:");
+            printf("\nNew item name:");
             scanf(" %s", &a.product_name);
-            printf("new rate: ");
+            printf("\nNew rate: ");
             scanf(" %f", &a.rate);
-            printf("\nnew weight: ");
+            printf("\nNew weight: ");
             scanf(" %f", &a.weight);
-            printf("\nnew quantity: ");
+            printf("\nNew quantity: ");
             scanf(" %d", &a.quantity);
 
             printf("\nnew description: ");
@@ -355,7 +356,7 @@ void sort()
         fwrite(&s[i], sizeof(s[i]), 1, fp);
     }
     fclose(fp);
-    printf("records sorted successfully use display option to view\n");
+    printf("\nRecords sorted successfully use display option to view\n");
 
     system("pause");
     menu();
@@ -368,11 +369,11 @@ void bill()
     char response;
     while (1)
     {
-        printf("purchase product_code: ");
+        printf("\nPurchase product_code: ");
         scanf("%d", &purchase_pcode[count]);
-        printf("purchase product_quantity: ");
+        printf("\nPurchase product_quantity: ");
         scanf("%d", &purchase_pqty[count]);
-        printf("are more product purchased(Y/N): ");
+        printf("\nAre more product purchased(Y/N): ");
         scanf(" %c", &response);
         count++;
         if (response == 'N' || response == 'n')
@@ -416,7 +417,7 @@ void totalbill(int prod_id[], int prod_qty[], int count)
     FILE *fp;
     item a;
     printf("***************************");
-    printf("\n------xyz store-------\n");
+    printf("\n------A-NMHRJN STORE-------\n");
     printf("---------------------------");
     printf("\nname\tQTY\trate");
     fp = fopen("record.txt", "rb");
@@ -434,7 +435,7 @@ void totalbill(int prod_id[], int prod_qty[], int count)
     }
     printf("\n---------------------------");
     printf("\n\t\ttotal= %.2f\n", total);
-    printf("\n\t***please visit again***\n");
+    printf("\n\t***Please Visit Again***\n");
     fclose(fp);
     system("pause");
     menu();
